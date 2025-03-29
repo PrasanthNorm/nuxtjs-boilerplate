@@ -6,6 +6,9 @@
   </div>
 </template>
 
+
+
 <script setup>
 // Add layout-specific logic here if needed and not
+
 </script>

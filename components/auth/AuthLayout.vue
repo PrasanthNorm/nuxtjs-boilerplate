@@ -1,8 +1,13 @@
 <template>
+      <nav class="bg-[#073f60] p-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-white text-2xl font-bold">Resurrection Ministries</h1>
+      </div>
+    </nav>
   <div class="min-h-screen flex items-center justify-center  p-4">
-    <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
+  
       <slot />
-    </div>
+    
   </div>
 </template>
 

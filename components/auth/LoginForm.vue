@@ -1,6 +1,8 @@
 <template>
-    <div class="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div class="max-w-md w-full bg-white p-8 rounded-lg shadow-md space-y-6">
+    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full bg-white p-8 rounded-lg shadow-2xl backdrop-blur-sm space-y-6">
+
+
         <div class="flex items-center justify-center space-x-2">
           <div class="w-12 h-12 bg-[#073f60] rounded-full flex items-center justify-center">
             <span class="text-white font-bold">RM</span>

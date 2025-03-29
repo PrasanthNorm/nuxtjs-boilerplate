@@ -75,17 +75,32 @@
       </div>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer Navigation -->
     <footer class="fixed bottom-0 w-full bg-white shadow-lg p-4">
-      <div class="container mx-auto flex justify-center space-x-6">
-        <NuxtLink to="/admin" class="px-6 py-2 bg-[#073f60] text-white rounded hover:bg-blue-700 transition-colors">
-          Admin
+      <div class="container mx-auto flex justify-center space-x-8">
+        <NuxtLink to="/church" class="flex flex-col items-center text-center">
+          <div class="w-12 h-12 flex items-center justify-center rounded-full bg-[#073f60] text-white hover:bg-blue-700 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+          </div>
+          <span class="mt-1 text-sm font-medium text-[#073f60]">Church</span>
         </NuxtLink>
-        <NuxtLink to="/tasks" class="px-6 py-2 bg-[#073f60] text-white rounded hover:bg-blue-700 transition-colors">
-          Tasks
+        <NuxtLink to="/tasks" class="flex flex-col items-center text-center">
+          <div class="w-12 h-12 flex items-center justify-center rounded-full bg-[#073f60] text-white hover:bg-blue-700 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+            </svg>
+          </div>
+          <span class="mt-1 text-sm font-medium text-[#073f60]">Tasks</span>
         </NuxtLink>
-        <NuxtLink to="/users" class="px-6 py-2 bg-[#073f60] text-white rounded hover:bg-blue-700 transition-colors">
-          Users
+        <NuxtLink to="/users" class="flex flex-col items-center text-center">
+          <div class="w-12 h-12 flex items-center justify-center rounded-full bg-[#073f60] text-white hover:bg-blue-700 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <span class="mt-1 text-sm font-medium text-[#073f60]">Users</span>
         </NuxtLink>
       </div>
     </footer>

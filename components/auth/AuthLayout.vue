@@ -7,5 +7,5 @@
 </template>
 
 <script setup>
-// Add layout-specific logic here if needed
+// Add layout-specific logic here if needed and not
 </script>

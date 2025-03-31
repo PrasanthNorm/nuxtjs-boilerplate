@@ -7,6 +7,19 @@
       </div>
     </nav>
     <main class="container mx-auto p-4">
+
+
+   
+  <div>
+    <h2>Weather Forecast</h2>
+    <ul v-if="weatherData.length">
+      <li v-for="weather in weatherData" :key="weather.date">
+        <strong>{{ weather.date }}</strong>: {{ weather.temperatureC }}°C - {{ weather.summary }}
+      </li>
+    </ul>
+    <p v-else>Loading...</p>
+  </div>
+  
       <!-- Add your landing page content here -->
     </main>
   </div>

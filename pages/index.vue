@@ -13,7 +13,23 @@
 </template>
 
 <script setup>
-// Add your script logic here
+import { ref, onMounted } from "vue";
+
+const weatherData = ref([]);
+const apiUrl = "https://rmchurch.azurewebsites.net/WeatherForecast"; // Update with your API URL
+
+const fetchWeather = async () => {
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) throw new Error("Failed to fetch data");
+    weatherData.value = await response.json();
+    console.log(    weatherData.value)
+  } catch (error) {
+    console.error("Error fetching weather data:", error);
+  }
+};
+
+onMounted(fetchWeather);
 </script>
 
 <style>

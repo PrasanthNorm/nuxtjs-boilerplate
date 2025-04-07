@@ -15,7 +15,23 @@ export const useAuth = () => {
   const user = useState<User | null>('user', () => null)
   const isAuthenticated = computed(() => !!user.value)
 
+  // Test credentials for development
+  const TEST_CREDENTIALS = {
+    username: 'test@example.com',
+    password: 'password123'
+  }
+
   const login = async (credentials: LoginCredentials) => {
+    // Check for test credentials
+    if (credentials.username === TEST_CREDENTIALS.username && 
+        credentials.password === TEST_CREDENTIALS.password) {
+      user.value = {
+        id: 'test-user-id',
+        username: TEST_CREDENTIALS.username,
+        token: 'test-token'
+      }
+      return true
+    }
     try {
       // Simulated API call - replace with your actual API endpoint
       const response = await fetch('https://api.example.com/auth/login', {

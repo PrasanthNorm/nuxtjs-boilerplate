@@ -1,6 +1,9 @@
 <template>
     <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full bg-white p-8 rounded-lg shadow-2xl backdrop-blur-sm space-y-6">
+          <div v-if="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <span class="block sm:inline">{{ error }}</span>
+          </div>
 
 
         <div class="flex items-center justify-center space-x-2">
@@ -40,7 +43,8 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
               </svg>
-              <span>Sign in</span>
+              <span v-if="!loading">Sign in</span>
+              <span v-else>Signing in...</span>
             </button>
           </div>
         </form>
@@ -49,12 +53,36 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue';
-  const username = ref('');
-  const password = ref('');
+import { ref } from 'vue';
+import { useAuth } from '~/composables/useAuth';
+
+const username = ref('');
+const password = ref('');
+const error = ref('');
+const loading = ref(false);
+
+const { login } = useAuth();
+
+const submit = async () => {
+  error.value = '';
+  loading.value = true;
   
-  const submit = () => {
-    // Handle form submission
-  };
-  </script>
+  try {
+    const success = await login({
+      username: username.value,
+      password: password.value
+    });
+
+    if (success) {
+      navigateTo('/dashboard');
+    } else {
+      error.value = 'Invalid username or password';
+    }
+  } catch (e) {
+    error.value = 'An error occurred during login';
+  } finally {
+    loading.value = false;
+  }
+};
+</script>
   

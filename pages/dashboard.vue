@@ -1,3 +1,16 @@
+<script setup>
+import { ref } from 'vue';
+import { useAuth } from '~/composables/useAuth';
+
+const isMenuOpen = ref(false);
+const { user, logout } = useAuth();
+
+// Add middleware to protect this route
+definePageMeta({
+  middleware: ['auth']
+});
+</script>
+
 <template>
   <div class="min-h-screen bg-gray-100 pb-24">
     <!-- Navigation Bar -->
@@ -8,7 +21,7 @@
           <h1 class="text-white text-lg md:text-2xl font-bold truncate">Resurrection Ministries</h1>
         </div>
         <div class="flex items-center space-x-2 md:space-x-4">
-          <span class="text-white text-sm md:text-base">Welcome, {{ username }}</span>
+          <span class="text-white text-sm md:text-base">Welcome, {{ user?.username }}</span>
           <div class="relative">
             <button @click="isMenuOpen = !isMenuOpen" class="text-white p-2 rounded-full hover:bg-[#0a4f7a] transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -119,13 +132,3 @@
   </div>
 </template>
 
-<script setup>
-const username = ref('John Doe'); // Replace with actual user data
-const isMenuOpen = ref(false);
-
-const logout = () => {
-  isMenuOpen.value = false;
-  // Implement logout logic here
-  navigateTo('/login');
-};
-</script>

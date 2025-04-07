@@ -5,6 +5,35 @@ import Navigation from '~/components/common/Navigation.vue';
 const activeTab = ref('registration');
 const isMenuOpen = ref(false);
 
+// Registration form data
+const registrationForm = ref({
+  firstname: '',
+  surname: '',
+  mobile: ''
+});
+
+// Today's registrations
+const todayRegistrations = ref([]);
+
+// Save registration
+const saveRegistration = () => {
+  const now = new Date();
+  const registration = {
+    id: Date.now(),
+    ...registrationForm.value,
+    time: now.toLocaleTimeString()
+  };
+  
+  todayRegistrations.value.unshift(registration);
+  
+  // Reset form
+  registrationForm.value = {
+    firstname: '',
+    surname: '',
+    mobile: ''
+  };
+};
+
 const tabs = [
   { id: 'registration', label: 'Registration' },
   { id: 'complete-registration', label: 'Complete Registration' },
@@ -80,20 +109,77 @@ definePageMeta({
     <div class="container mx-auto p-4 md:p-6">
       <!-- Registration Tab -->
       <div v-if="activeTab === 'registration'" class="space-y-4">
+        <!-- Registration Form -->
         <div class="bg-white rounded-lg shadow-md p-6">
-          <h2 class="text-xl font-semibold mb-4 text-[#073f60]">New Registrations</h2>
-          <div class="space-y-4">
-            <div class="flex items-center justify-between text-gray-600">
-              <span>Total New Registrations</span>
-              <span class="font-semibold bg-gray-100 px-3 py-1 rounded-full">24</span>
+          <h2 class="text-xl font-semibold mb-4 text-[#073f60]">New Registration</h2>
+          <form @submit.prevent="saveRegistration" class="space-y-4">
+            <div>
+              <label for="firstname" class="block text-sm font-medium text-gray-700">First Name</label>
+              <input
+                type="text"
+                id="firstname"
+                v-model="registrationForm.firstname"
+                placeholder="Enter first name"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#073f60] focus:ring-[#073f60] sm:text-sm"
+                required
+              />
             </div>
-            <div class="flex items-center justify-between text-gray-600">
-              <span>Pending Review</span>
-              <span class="font-semibold bg-gray-100 px-3 py-1 rounded-full">12</span>
+            <div>
+              <label for="surname" class="block text-sm font-medium text-gray-700">Surname</label>
+              <input
+                type="text"
+                id="surname"
+                v-model="registrationForm.surname"
+                placeholder="Enter surname"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#073f60] focus:ring-[#073f60] sm:text-sm"
+                required
+              />
             </div>
-            <button class="w-full bg-[#073f60] text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-              Add New Registration
+            <div>
+              <label for="mobile" class="block text-sm font-medium text-gray-700">Mobile Number</label>
+              <input
+                type="tel"
+                id="mobile"
+                v-model="registrationForm.mobile"
+                placeholder="Enter mobile number"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#073f60] focus:ring-[#073f60] sm:text-sm"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-[#073f60] text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+            >
+              Save Registration
             </button>
+          </form>
+        </div>
+
+        <!-- Today's Registrations -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h2 class="text-xl font-semibold mb-4 text-[#073f60]">Today's Registrations</h2>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Name</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Surname</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mobile</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <tr v-for="registration in todayRegistrations" :key="registration.id">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ registration.firstname }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ registration.surname }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ registration.mobile }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ registration.time }}</td>
+                </tr>
+                <tr v-if="todayRegistrations.length === 0">
+                  <td colspan="4" class="px-6 py-4 text-center text-sm text-gray-500">No registrations today</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

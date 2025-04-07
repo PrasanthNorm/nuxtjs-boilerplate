@@ -120,7 +120,7 @@ definePageMeta({
                 id="firstname"
                 v-model="registrationForm.firstname"
                 placeholder="Enter first name"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#073f60] focus:ring-[#073f60] sm:text-sm"
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#073f60] focus:border-[#073f60] sm:text-sm"
                 required
               />
             </div>
@@ -131,7 +131,7 @@ definePageMeta({
                 id="surname"
                 v-model="registrationForm.surname"
                 placeholder="Enter surname"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#073f60] focus:ring-[#073f60] sm:text-sm"
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#073f60] focus:border-[#073f60] sm:text-sm"
                 required
               />
             </div>
@@ -142,7 +142,7 @@ definePageMeta({
                 id="mobile"
                 v-model="registrationForm.mobile"
                 placeholder="Enter mobile number"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#073f60] focus:ring-[#073f60] sm:text-sm"
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#073f60] focus:border-[#073f60] sm:text-sm"
                 required
               />
             </div>

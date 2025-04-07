@@ -3,9 +3,21 @@
     <nav class="bg-[#073f60] p-4">
       <div class="container mx-auto flex justify-between items-center">
         <h1 class="text-white text-2xl font-bold">Resurrection Ministries</h1>
-        <NuxtLink to="/login" class="text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
-          Login
-        </NuxtLink>
+        <div class="flex items-center space-x-4">
+          <button
+            v-if="isInstallable"
+            @click="handleInstall"
+            class="bg-white text-[#073f60] px-4 py-2 rounded hover:bg-gray-100 transition-colors flex items-center space-x-2 border border-[#073f60]"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            <span>Install App</span>
+          </button>
+          <NuxtLink to="/login" class="text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
+            Login
+          </NuxtLink>
+        </div>
       </div>
     </nav>
     
@@ -33,6 +45,33 @@ import { ref, onMounted } from "vue";
 const weatherData = ref([]);
 const error = ref(null);
 const apiUrl = "https://rmchurch.azurewebsites.net/WeatherForecast"; 
+
+// PWA install button state
+const deferredPrompt = ref(null);
+const isInstallable = ref(false);
+
+// Listen for the beforeinstallprompt event
+onMounted(() => {
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt.value = e;
+    isInstallable.value = true;
+  });
+});
+
+// Handle install button click
+const handleInstall = async () => {
+  if (!deferredPrompt.value) return;
+  
+  deferredPrompt.value.prompt();
+  const { outcome } = await deferredPrompt.value.userChoice;
+  
+  if (outcome === 'accepted') {
+    isInstallable.value = false;
+  }
+  deferredPrompt.value = null;
+};
+
 
 const fetchWeather = async () => {
   try {
